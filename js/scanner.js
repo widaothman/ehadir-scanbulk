@@ -47,3 +47,9 @@ function startScanner(){
         });
 
 }
+
+window.onload=function(){
+
+    startScanner();
+
+}
