@@ -13,30 +13,50 @@
 
 <body>
 
-<h2>Bulk QR Scanner</h2>
+<body>
+
+<div class="container">
+
+<h2>e-Hadir Bulk QR Scanner</h2>
+
+<div class="card">
 
 <div id="reader"></div>
 
-<hr>
+<div class="status">
 
-<h3>Jumlah Scan :
+<div>
+Jumlah Scan :
 <span id="total">0</span>
-</h3>
+</div>
 
-<table border="1" width="100%">
+<div>
+Queue :
+<span id="queueCount">0</span>
+</div>
+
+<div>
+Sending :
+<span id="sendingCount">0</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<table>
 
 <thead>
 
 <tr>
 
 <th>Bil</th>
-
 <th>ID</th>
-
 <th>Nama</th>
-
 <th>Kelas</th>
-
+<th>Status</th>
 <th>Masa</th>
 
 </tr>
@@ -49,15 +69,18 @@
 
 </table>
 
+</div>
+
+</div>
+
 <script src="vendor/html5-qrcode.min.js"></script>
 
 <script src="js/config.js"></script>
-
 <script src="js/queue.js"></script>
-
 <script src="js/ui.js"></script>
-
 <script src="js/scanner.js"></script>
+
+</body>
 
 </body>
 </html>
