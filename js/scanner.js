@@ -1,4 +1,4 @@
-const video = document.getElementById("reader");
+const video = document.getElementById("video");
 
 let scanner;
 
