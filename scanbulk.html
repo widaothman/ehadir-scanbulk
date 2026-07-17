@@ -1,1 +1,63 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Bulk QR Scanner</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<h2>Bulk QR Scanner</h2>
+
+<div id="reader"></div>
+
+<hr>
+
+<h3>Jumlah Scan :
+<span id="total">0</span>
+</h3>
+
+<table border="1" width="100%">
+
+<thead>
+
+<tr>
+
+<th>Bil</th>
+
+<th>ID</th>
+
+<th>Nama</th>
+
+<th>Kelas</th>
+
+<th>Masa</th>
+
+</tr>
+
+</thead>
+
+<tbody id="scanTable">
+
+</tbody>
+
+</table>
+
+<script src="vendor/html5-qrcode.min.js"></script>
+
+<script src="js/config.js"></script>
+
+<script src="js/queue.js"></script>
+
+<script src="js/ui.js"></script>
+
+<script src="js/scanner.js"></script>
+
+</body>
+</html>
