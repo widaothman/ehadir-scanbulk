@@ -1,67 +1,49 @@
-let html5QrCode = null;
+const video = document.getElementById("reader");
 
-async function startScanner() {
+let scanner;
 
-    try {
+function startScanner(){
 
-        html5QrCode = new Html5Qrcode("reader");
+    scanner = new QrScanner(
 
-        await html5QrCode.start(
+        video,
 
-            {
-                facingMode: "environment"
-            },
+        result => {
 
-            {
-                fps: CONFIG.FPS,
-                qrbox: {
-                    width: CONFIG.QRBOX,
-                    height: CONFIG.QRBOX
-                }
-            },
+            let qrData = result.data
+                ? result.data.trim()
+                : String(result).trim();
 
-            onScanSuccess,
+            onScan(qrData);
 
-            onScanFailure
+        },
 
-        );
+        {
 
-        console.log("✅ Camera Started");
+            preferredCamera: "environment",
 
-    } catch (err) {
+            highlightScanRegion: true,
 
-        console.error(err);
+            highlightCodeOutline: true,
 
-        alert("Tidak dapat membuka kamera.");
+            returnDetailedScanResult: true
 
-    }
+        }
 
-}
+    );
 
-function stopScanner() {
+    scanner.start()
+        .then(()=>{
 
-    if (html5QrCode) {
+            console.log("Camera Ready");
 
-        html5QrCode.stop();
+        })
+        .catch(err=>{
 
-    }
+            console.error(err);
 
-}
+            alert(err);
 
-function onScanSuccess(decodedText, decodedResult) {
-
-    console.log("QR:", decodedText);
+        });
 
 }
-
-function onScanFailure(error) {
-
-    // Biarkan kosong dahulu
-
-}
-
-window.addEventListener("load", () => {
-
-    startScanner();
-
-});
