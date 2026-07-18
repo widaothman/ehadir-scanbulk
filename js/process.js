@@ -1,5 +1,5 @@
 function processScan(id){
 
-    alert(id);
+    console.log("ID Murid :", id);
 
 }
