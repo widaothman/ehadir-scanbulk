@@ -1,8 +1,9 @@
 const video = document.getElementById("video");
 
 let scanner;
+let lastScan = "";
 
-function startScanner(){
+function startScanner() {
 
     scanner = new QrScanner(
 
@@ -14,42 +15,44 @@ function startScanner(){
                 ? result.data.trim()
                 : String(result).trim();
 
-            onScan(qrData);
+            // Sokong QR lama dan QR baru
+            if (qrData.includes("id=")) {
+
+                const url = new URL(qrData);
+                qrData = url.searchParams.get("id");
+
+            }
+
+            // Elak scan QR sama berulang kali
+            if (lastScan === qrData) return;
+
+            lastScan = qrData;
+
+            console.log("SCAN :", qrData);
+
+            processScan(qrData);
+
+            setTimeout(() => {
+
+                lastScan = "";
+
+            },1000);
 
         },
 
         {
 
-            preferredCamera: "environment",
-
-            highlightScanRegion: true,
-
-            highlightCodeOutline: true,
-
-            returnDetailedScanResult: true
+            preferredCamera:"environment",
+            highlightScanRegion:true,
+            highlightCodeOutline:true,
+            returnDetailedScanResult:true
 
         }
 
     );
 
-    scanner.start()
-        .then(()=>{
-
-            console.log("Camera Ready");
-
-        })
-        .catch(err=>{
-
-            console.error(err);
-
-            alert(err);
-
-        });
+    scanner.start();
 
 }
 
-window.onload=function(){
-
-    startScanner();
-
-}
+window.onload = startScanner;
