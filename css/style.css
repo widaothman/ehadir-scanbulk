@@ -21,7 +21,11 @@ h2{
     margin-bottom:20px;
 }
 
-.card{ display:flex; flex-direction:column; align-items:center;
+.card video{
+    width:100%;
+    height:400px;
+    object-fit:cover;
+    border-radius:12px;
 }
 
 .camera-wrapper{
