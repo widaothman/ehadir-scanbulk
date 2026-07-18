@@ -71,6 +71,7 @@ const hasil = document.getElementById("hasil");
 const btn = document.getElementById("btnSahkan");
 
 let currentID = "";
+let lastScan = "";
 
 const scanner = new QrScanner(
   video,
@@ -94,12 +95,23 @@ if (qrData.includes("id=")) {
 
 }
 
-    hasil.innerHTML =
-      "✅ QR Dikesan: " + currentID;
+   hasil.innerHTML =
+  "✅ QR Dikesan: " + currentID;
 
-    btn.style.display = "block";
 
-    scanner.stop();
+    if (lastScan === currentID) return;
+
+lastScan = currentID;
+
+setTimeout(() => {
+    lastScan = "";
+}, 1000);
+    
+    
+    // Panggil fungsi bulk
+processScan(currentID);
+
+// Jangan berhenti kamera
 
   },
   {
@@ -126,13 +138,6 @@ scanner.start()
 
 });
 
-btn.addEventListener("click", function(){
-
-  window.location.href =
-    "https://script.google.com/macros/s/AKfycbyiXYuNvjfP-MIdMR9Pe01VqfFN7uqDeApx2nIlfDRWADtGYEL6sFlGjKC86AZNAYl7Tg/exec?page=scan&id=" +
-    encodeURIComponent(currentID);
-
-});
 
 </script>
 
