@@ -1,58 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>e-Hadir QR Scanner</title>
+
+<style>
+
+body{
+  font-family:Arial,sans-serif;
+  text-align:center;
+  padding:20px;
+}
+
+video{
+  width:100%;
+  max-width:500px;
+  border-radius:12px;
+}
+
+#hasil{
+  margin-top:20px;
+  font-size:24px;
+  font-weight:bold;
+  color:green;
+}
+
+button{
+  width:100%;
+  max-width:500px;
+  padding:15px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+  margin-top:15px;
+  background:#2DC87A;
+  color:white;
+}
+
+</style>
+
+<script src="https://unpkg.com/qr-scanner/qr-scanner.umd.min.js"></script>
+
+</head>
+<body>
+
+<h2>📷 e-Hadir QR Scanner</h2>
+
+<video
+  id="video"
+  playsinline
+  autoplay
+  muted
+  style="width:100%;max-width:500px;">
+</video>
+
+<div id="hasil">
+Sedia untuk scan...
+</div>
+
+<button id="btnSahkan" style="display:none;">
+✓ GUNA ID INI
+</button>
+
+<script>
+
 const video = document.getElementById("video");
+const hasil = document.getElementById("hasil");
+const btn = document.getElementById("btnSahkan");
 
-let scanner;
-let lastScan = "";
+let currentID = "";
 
-function startScanner() {
+const scanner = new QrScanner(
+  video,
+  result => {
 
-    scanner = new QrScanner(
+    console.log(result);
 
-        video,
+    let qrData = result.data
+  ? result.data.trim()
+  : String(result).trim();
 
-        result => {
+if (qrData.includes("id=")) {
 
-            let qrData = result.data
-                ? result.data.trim()
-                : String(result).trim();
+  const url = new URL(qrData);
 
-            // Sokong QR lama dan QR baru
-            if (qrData.includes("id=")) {
+  currentID = url.searchParams.get("id");
 
-                const url = new URL(qrData);
-                qrData = url.searchParams.get("id");
+} else {
 
-            }
-
-            // Elak scan QR sama berulang kali
-            if (lastScan === qrData) return;
-
-            lastScan = qrData;
-
-            console.log("SCAN :", qrData);
-
-            processScan(qrData);
-
-            setTimeout(() => {
-
-                lastScan = "";
-
-            },1000);
-
-        },
-
-        {
-
-            preferredCamera:"environment",
-            highlightScanRegion:true,
-            highlightCodeOutline:true,
-            returnDetailedScanResult:true
-
-        }
-
-    );
-
-    scanner.start();
+  currentID = qrData;
 
 }
 
-window.onload = startScanner;
+    hasil.innerHTML =
+      "✅ QR Dikesan: " + currentID;
+
+    btn.style.display = "block";
+
+    scanner.stop();
+
+  },
+  {
+    preferredCamera: "environment",
+    highlightScanRegion: true,
+    highlightCodeOutline: true,
+    returnDetailedScanResult: true
+  }
+);
+
+scanner.start()
+.then(() => {
+
+  hasil.innerHTML =
+    "✅ Kamera aktif. Halakan kepada QR";
+
+})
+.catch(err => {
+
+  hasil.innerHTML =
+    "❌ " + err;
+
+  console.error(err);
+
+});
+
+btn.addEventListener("click", function(){
+
+  window.location.href =
+    "https://script.google.com/macros/s/AKfycbyiXYuNvjfP-MIdMR9Pe01VqfFN7uqDeApx2nIlfDRWADtGYEL6sFlGjKC86AZNAYl7Tg/exec?page=scan&id=" +
+    encodeURIComponent(currentID);
+
+});
+
+</script>
+
+</body>
+</html>
