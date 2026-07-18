@@ -1,7 +1,6 @@
 const video = document.getElementById("video");
 
 let scanner;
-let isScanning = false;
 
 function startScanner() {
 
@@ -11,42 +10,43 @@ function startScanner() {
 
         result => {
 
-            if (isScanning) return;
-
-            isScanning = true;
-
             let qrData = result.data
                 ? result.data.trim()
                 : String(result).trim();
 
             console.log("QR :", qrData);
 
-            document.getElementById("hasil").innerHTML =
-                "✅ QR : " + qrData;
-
-            // Lepaskan semula selepas 500ms
-            setTimeout(() => {
-                isScanning = false;
-            }, 500);
+           document.getElementById("hasil").innerHTML =
+            "✅ QR : " + qrData;
 
         },
 
         {
             preferredCamera: "environment",
             highlightScanRegion: true,
-            highlightCodeOutline: true
+            highlightCodeOutline: true,
+            returnDetailedScanResult: true
         }
 
     );
 
     scanner.start()
         .then(() => {
-            console.log("Camera Ready");
+
+            console.log("✅ Camera Ready");
+
         })
         .catch(err => {
+
             console.error(err);
+            alert(err);
+
         });
 
 }
 
-window.onload = startScanner;
+window.onload = function () {
+
+    startScanner();
+
+};
