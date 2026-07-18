@@ -16,7 +16,8 @@ function startScanner() {
 
             console.log("QR :", qrData);
 
-            alert(qrData);
+           document.getElementById("hasil").innerHTML =
+            "✅ QR : " + qrData;
 
         },
 
