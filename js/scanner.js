@@ -1,3 +1,5 @@
+alert("scanner.js loaded");
+
 const video = document.getElementById("video");
 
 let scanner;
