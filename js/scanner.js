@@ -111,6 +111,12 @@ setTimeout(() => {
     // Panggil fungsi bulk
 processScan(currentID);
 
+  hasil.innerHTML =
+"✅ QR Dikesan : " + currentID;
+
+processScan(currentID);
+
+    
 // Jangan berhenti kamera
 
   },
