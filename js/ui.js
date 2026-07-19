@@ -1,8 +1,8 @@
 function updateCounter(){
 
-    document.getElementById("total").innerText = scanQueue.length;
+    document.getElementById("total").innerText = queue.length;
 
-    document.getElementById("queueCount").innerText = scanQueue.length;
+    document.getElementById("queueCount").innerText = queue.length;
 
 }
 
@@ -12,7 +12,7 @@ function renderTable(){
 
     tbody.innerHTML="";
 
-    scanQueue.forEach((student,index)=>{
+    queue.forEach((student,index)=>{
 
         tbody.innerHTML +=`
 
