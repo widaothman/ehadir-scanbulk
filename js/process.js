@@ -1,26 +1,20 @@
 let bil = 1;
 
-function processScan(id){
+function processScan(id) {
+    if (isProcessing) return;
 
-    // Cari murid dalam RAM
     const murid = getStudent(id);
 
-    // Jika ID tidak wujud
     if (!murid) {
+        isProcessing = true;
+        showToast("❌ ID Murid tidak dijumpai: " + id, true);
+        setTimeout(() => { isProcessing = false; }, 3000);
+        return;
+    }
 
-    alert("❌ ID Murid tidak dijumpai\n\n" + id);
-
-    return;
-
-}
-
-// Paparan selepas scan berjaya
-alert(
-    "✅ " + id +
-    "\n\n" +
-    murid.nama +
-    "\n" +
-    murid.kelas
+    isProcessing = true;
+    showToast("✅ " + id + " — " + murid.nama + " (" + murid.kelas + ")", false);
+    setTimeout(() => { isProcessing = false; }, 3000);
 );
 
     const tbody = document.getElementById("scanTable");
