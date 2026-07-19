@@ -1,7 +1,5 @@
 let STUDENTS = {};
 
-let STUDENTS = {};
-
 async function loadStudents() {
 
     try {
@@ -22,11 +20,6 @@ async function loadStudents() {
 
 }
 
-function getStudent(id) {
-
-    return STUDENTS[id] || null;
-
-}
 function getStudent(id) {
 
     return STUDENTS[id] || null;
