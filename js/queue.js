@@ -29,19 +29,21 @@ async function processQueue(){
 
     try{
 
-        const response = await fetch(CONFIG.API_URL,{
+        const response = await fetch(CONFIG.API_URL, {
 
-            method:"POST",
+    method: "POST",
 
-            body:JSON.stringify({
+    body: JSON.stringify({
 
-                action:"bulkAttendance",
+        action: "bulkAttendance",
 
-                id:item.id
+        id: item.id,
 
-            })
+        guru: CURRENT_GURU
 
-        });
+    })
+
+});
 
         const result = await response.json();
 
