@@ -2,33 +2,19 @@ let STUDENTS = {};
 
 async function loadStudents() {
 
-    try {
+    const url = `${CONFIG.API_URL}?action=students&t=${Date.now()}`;
 
-        const response = await fetch(
-            `${CONFIG.API_URL}?action=students&t=${Date.now()}`
-        );
+    const response = await fetch(url);
 
-        if (!response.ok) {
-            throw new Error("HTTP " + response.status);
-        }
+    const text = await response.text();
 
-        STUDENTS = await response.json();
+    alert(text.substring(0,150));
 
-        console.log("Jumlah Murid:", Object.keys(STUDENTS).length);
-
-    } catch (err) {
-
-        console.error("Gagal load murid:", err);
-
-        STUDENTS = {};
-
-        alert("❌ Gagal memuatkan senarai murid.\n\n" + err.message);
-
-    }
+    STUDENTS = JSON.parse(text);
 
 }
 
-function getStudent(id) {
+function getStudent(id){
 
     id = String(id).trim().toUpperCase();
 
