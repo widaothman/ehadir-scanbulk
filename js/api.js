@@ -1,7 +1,27 @@
-const CONFIG = {
+let STUDENTS = {};
 
-    API_URL: "https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbycKEbDLqLzKeV8IFlOF9QCa9wmYJckRNU6QCBCuy5p38tGM393BFAZRwEhOpeN0EKn/exec",
+async function loadStudents() {
 
-    API_VERSION: "1.0"
+    try {
 
-};
+        const response = await fetch(
+            `${CONFIG.API_URL}?action=students&v=${CONFIG.API_VERSION}`
+        );
+
+        STUDENTS = await response.json();
+
+        console.log("Jumlah Murid :", Object.keys(STUDENTS).length);
+
+    } catch (err) {
+
+        console.error("Gagal load murid", err);
+
+    }
+
+}
+
+function getStudent(id) {
+
+    return STUDENTS[id] || null;
+
+}
