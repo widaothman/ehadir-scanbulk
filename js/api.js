@@ -1,33 +1,32 @@
 let STUDENTS = {};
 
-async function loadStudents() {
+let STUDENTS = {};
 
-    alert("Load Students dipanggil");
+async function loadStudents() {
 
     try {
 
         const response = await fetch(
-            `${CONFIG.API_URL}?action=students`
+            `${CONFIG.API_URL}?action=students&v=${CONFIG.API_VERSION}`
         );
 
-        alert("Response OK = " + response.ok);
+        STUDENTS = await response.json();
 
-        const text = await response.text();
+        console.log("Jumlah Murid :", Object.keys(STUDENTS).length);
 
-        alert(text.substring(0,100));
+    } catch (err) {
 
-        STUDENTS = JSON.parse(text);
-
-        alert("Jumlah = " + Object.keys(STUDENTS).length);
-
-    } catch(err) {
-
-        alert("ERROR = " + err);
+        console.error("Gagal load murid", err);
 
     }
 
 }
 
+function getStudent(id) {
+
+    return STUDENTS[id] || null;
+
+}
 function getStudent(id) {
 
     return STUDENTS[id] || null;
