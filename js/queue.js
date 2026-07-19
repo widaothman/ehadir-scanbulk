@@ -47,7 +47,7 @@ async function processQueue(){
 
         const result = await response.json();
 
-        if(result.success){
+        if(result.berjaya){
 
             // Buang dari queue
             queue.shift();
