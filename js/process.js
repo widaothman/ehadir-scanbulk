@@ -8,10 +8,15 @@ function processScan(id){
     // Jika ID tidak wujud
     if(!murid){
 
-        alert("ID Murid tidak dijumpai : " + id);
-        return;
+    alert(
+      "ID = [" + id + "]\n\n" +
+      "Jumlah Murid = " + Object.keys(STUDENTS).length + "\n\n" +
+      "Key pertama = " + Object.keys(STUDENTS).slice(0,5).join(", ")
+    );
 
-    }
+    return;
+
+}
 
     const tbody = document.getElementById("scanTable");
 
