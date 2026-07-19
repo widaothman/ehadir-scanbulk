@@ -1,7 +1,7 @@
 const CONFIG = {
 
     // URL Apps Script (akan diisi kemudian)
-   API_URL: "https://script.google.com/a/macros/moe-dl.edu.my/AKfycbxSmy6OwY7Ydqt6bVdRlab_HbpDDlmXIZgH2RPlak79nvMLhn_a63T_XUZdzY5bSx0MNg/exec",
+   API_URL: "https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbxSmy6OwY7Ydqt6bVdRlab_HbpDDlmXIZgH2RPlak79nvMLhn_a63T_XUZdzY5bSx0MNg/exec",
     API_VERSION: "1.0",
         
     // Bilangan maksimum rekod dihantar sekali
