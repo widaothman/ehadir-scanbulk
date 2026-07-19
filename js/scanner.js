@@ -29,7 +29,7 @@ function startScanner() {
 
             }
 
-            console.log("QR :", qrData);
+            processScan(qrData);
 
             if (hasil) {
                 hasil.innerHTML = "✅ QR : " + qrData;
