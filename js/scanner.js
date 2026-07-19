@@ -68,7 +68,9 @@ function startScanner() {
 
 }
 
-window.onload = function () {
+window.onload = async function () {
+
+    await loadStudents();
 
     startScanner();
 
