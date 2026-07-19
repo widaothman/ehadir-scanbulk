@@ -10,16 +10,9 @@ function startScanner() {
 
         result => {
 
-            let qrData = result.data
-                ? result.data.trim()
-                : String(result).trim();
+    console.log(result);
 
-            console.log("QR :", qrData);
-
-           document.getElementById("hasil").innerHTML =
-            "✅ QR : " + qrData;
-
-        },
+}
 
         {
             preferredCamera: "environment",
