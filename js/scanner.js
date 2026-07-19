@@ -70,7 +70,11 @@ function startScanner() {
 
 window.onload = async function () {
 
+    alert("1. Scanner mula");
+
     await loadStudents();
+
+    alert("2. Load selesai");
 
     startScanner();
 
