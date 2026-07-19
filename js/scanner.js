@@ -1,4 +1,5 @@
 const video = document.getElementById("video");
+const hasil = document.getElementById("hasil");
 
 let scanner;
 
@@ -10,9 +11,31 @@ function startScanner() {
 
         result => {
 
-    console.log("DETECT:", result);
+            let qrData = result.data
+                ? result.data.trim()
+                : String(result).trim();
 
-},
+            // Jika QR mengandungi URL dengan parameter id=
+            if (qrData.includes("id=")) {
+
+                try {
+
+                    const url = new URL(qrData);
+                    qrData = url.searchParams.get("id");
+
+                } catch (e) {
+                    console.log(e);
+                }
+
+            }
+
+            console.log("QR :", qrData);
+
+            if (hasil) {
+                hasil.innerHTML = "✅ QR : " + qrData;
+            }
+
+        },
 
         {
             preferredCamera: "environment",
@@ -28,11 +51,18 @@ function startScanner() {
 
             console.log("✅ Camera Ready");
 
+            if (hasil) {
+                hasil.innerHTML = "✅ Kamera aktif. Halakan kepada QR";
+            }
+
         })
         .catch(err => {
 
             console.error(err);
-            alert(err);
+
+            if (hasil) {
+                hasil.innerHTML = "❌ " + err;
+            }
 
         });
 
