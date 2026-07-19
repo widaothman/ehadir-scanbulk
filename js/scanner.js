@@ -10,9 +10,9 @@ function startScanner() {
 
         result => {
 
-    console.log(result);
+    console.log("DETECT:", result);
 
-}
+},
 
         {
             preferredCamera: "environment",
