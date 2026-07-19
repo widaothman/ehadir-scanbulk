@@ -29,12 +29,7 @@ function startScanner() {
 
             }
 
-           alert(
-  "QR=[" + qrData + "]\n" +
-  "Panjang=" + qrData.length
-);
-
-processScan(qrData);
+           processScan(qrData);
 
             if (hasil) {
                 hasil.innerHTML = "✅ QR : " + qrData;
