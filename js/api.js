@@ -2,27 +2,32 @@ let STUDENTS = {};
 
 async function loadStudents() {
 
+    alert("Load Students dipanggil");
+
     try {
 
-        const url = `${CONFIG.API_URL}?action=students&v=${Date.now()}`;
+        const response = await fetch(
+            `${CONFIG.API_URL}?action=students`
+        );
 
-        alert(url);
+        alert("Response OK = " + response.ok);
 
-        const response = await fetch(url);
+        const text = await response.text();
 
-        alert("Status = " + response.status);
+        alert(text.substring(0,100));
 
-        STUDENTS = await response.json();
+        STUDENTS = JSON.parse(text);
 
         alert("Jumlah = " + Object.keys(STUDENTS).length);
 
-    } catch (err) {
+    } catch(err) {
 
-        alert(err);
+        alert("ERROR = " + err);
 
     }
 
 }
+
 function getStudent(id) {
 
     return STUDENTS[id] || null;
