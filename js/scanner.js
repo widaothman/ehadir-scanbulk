@@ -29,7 +29,11 @@ function startScanner() {
 
             }
 
-           processScan(qrData);
+            // Tukar kepada huruf besar
+            qrData = qrData.trim().toUpperCase();
+
+            // Hantar ke process
+            processScan(qrData);
 
             if (hasil) {
                 hasil.innerHTML = "✅ QR : " + qrData;
@@ -47,6 +51,7 @@ function startScanner() {
     );
 
     scanner.start()
+
         .then(() => {
 
             console.log("✅ Camera Ready");
@@ -56,6 +61,7 @@ function startScanner() {
             }
 
         })
+
         .catch(err => {
 
             console.error(err);
@@ -69,7 +75,9 @@ function startScanner() {
 }
 
 window.onload = async function () {
+
     await loadStudents();
-    alert("Jumlah Murid loaded: " + Object.keys(STUDENTS).length);
+
     startScanner();
+
 };
