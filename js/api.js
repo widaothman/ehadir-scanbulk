@@ -4,22 +4,25 @@ async function loadStudents() {
 
     try {
 
-        const response = await fetch(
-            `${CONFIG.API_URL}?action=students&v=${CONFIG.API_VERSION}`
-        );
+        const url = `${CONFIG.API_URL}?action=students&v=${Date.now()}`;
+
+        alert(url);
+
+        const response = await fetch(url);
+
+        alert("Status = " + response.status);
 
         STUDENTS = await response.json();
 
-        console.log("Jumlah Murid :", Object.keys(STUDENTS).length);
+        alert("Jumlah = " + Object.keys(STUDENTS).length);
 
     } catch (err) {
 
-        console.error("Gagal load murid", err);
+        alert(err);
 
     }
 
 }
-
 function getStudent(id) {
 
     return STUDENTS[id] || null;
