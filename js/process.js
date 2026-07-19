@@ -6,17 +6,22 @@ function processScan(id){
     const murid = getStudent(id);
 
     // Jika ID tidak wujud
-    if(!murid){
+    if (!murid) {
 
-    alert(
-      "ID = [" + id + "]\n\n" +
-      "Jumlah Murid = " + Object.keys(STUDENTS).length + "\n\n" +
-      "Key pertama = " + Object.keys(STUDENTS).slice(0,5).join(", ")
-    );
+    alert("❌ ID Murid tidak dijumpai\n\n" + id);
 
     return;
 
 }
+
+// Paparan selepas scan berjaya
+alert(
+    "✅ " + id +
+    "\n\n" +
+    murid.nama +
+    "\n" +
+    murid.kelas
+);
 
     const tbody = document.getElementById("scanTable");
 
