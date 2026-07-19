@@ -70,8 +70,5 @@ function startScanner() {
 
 window.onload = async function () {
     await loadStudents();
-    if (hasil) {
-        hasil.innerHTML = "Jumlah Murid loaded: " + Object.keys(STUDENTS).length;
-    }
     startScanner();
 };
