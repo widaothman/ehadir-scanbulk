@@ -1,47 +1,82 @@
-const scanQueue = [];
+let queue = [];
 
-const scannedIds = new Set();
+let sending = false;
 
-function isDuplicate(id){
+function addQueue(data){
 
-    return scannedIds.has(id);
+    queue.push(data);
+
+    updateQueueCounter();
 
 }
 
-function addQueue(student){
+function updateQueueCounter(){
 
-    if(isDuplicate(student.id)){
+    document.getElementById("queueCount").innerHTML =
+        queue.length;
 
-        return false;
+}
+
+async function processQueue(){
+
+    if(sending) return;
+
+    if(queue.length===0) return;
+
+    sending=true;
+
+    let item = queue[0];
+
+    try{
+
+        const response = await fetch(CONFIG.API_URL,{
+
+            method:"POST",
+
+            body:JSON.stringify({
+
+                action:"bulkAttendance",
+
+                id:item.id
+
+            })
+
+        });
+
+        const result = await response.json();
+
+        if(result.success){
+
+            // Buang dari queue
+            queue.shift();
+
+            // Buang dari jadual
+            item.row.remove();
+
+            // Toast
+            showToast(
+                item.nama,
+                item.kelas
+            );
+
+        }
+
+    }catch(err){
+
+        console.log(err);
 
     }
 
-    scannedIds.add(student.id);
+    sending=false;
 
-    scanQueue.push(student);
-
-    updateCounter();
-
-    renderTable();
-
-    return true;
+    updateQueueCounter();
 
 }
 
-function removeQueue(id){
+setInterval(
 
-    const index = scanQueue.findIndex(item => item.id === id);
+    processQueue,
 
-    if(index >= 0){
+    CONFIG.SEND_INTERVAL
 
-        scanQueue.splice(index,1);
-
-    }
-
-}
-
-function getQueue(){
-
-    return scanQueue;
-
-}
+);
